@@ -40,7 +40,7 @@ export function VerifyPassKey({
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
     };
-  }, [passKey]); // Adding dependencies to avoid stale closure
+  }); // Adding dependencies to avoid stale closure
 
   return (
     <div className="flex flex-col items-center justify-center max-w-md mx-auto space-y-6 p-6 border border-gray-200 rounded-lg shadow-sm bg-white">

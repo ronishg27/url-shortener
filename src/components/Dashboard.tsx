@@ -15,6 +15,7 @@ import { URLInfo } from "@/lib/interface";
 import { getUrls } from "@/utils/getAllUrls";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Skeleton } from "./ui/skeleton";
 
 export const Dashboard = () => {
   const [urls, setUrls] = useState<URLInfo[]>([]);
@@ -34,7 +35,11 @@ export const Dashboard = () => {
     return <VerifyPassKey setIsVerified={setIsVerified} />;
   }
 
-  return (
+  return loading ? (
+    <div className="flex items-center justify-center min-h-screen">
+      <Skeleton className="h-8 w-64" />
+    </div>
+  ) : (
     <div className="max-w-5xl mx-auto py-10 px-6 space-y-8">
       <Card>
         <CardHeader>
