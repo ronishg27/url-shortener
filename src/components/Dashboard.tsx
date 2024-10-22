@@ -19,12 +19,13 @@ import { useEffect, useState } from "react";
 export const Dashboard = () => {
   const [urls, setUrls] = useState<URLInfo[]>([]);
   const [isVerified, setIsVerified] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (isVerified) {
       getUrls().then((res) => {
         setUrls(res);
-        console.log(res);
+        setLoading(false);
       });
     }
   }, [isVerified]);

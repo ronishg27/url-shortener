@@ -1,4 +1,5 @@
-import { Dispatch, SetStateAction, useState } from "react";
+"use client";
+import { Dispatch, SetStateAction, useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 
 export function VerifyPassKey({
@@ -18,17 +19,35 @@ export function VerifyPassKey({
     }
   };
 
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      handleSubmit();
-    }
-  });
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Enter") {
+        handleSubmit();
+      }
+    };
+
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (e.key === "/") {
+        document.getElementById("passkey")?.focus();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+
+    // Cleanup listeners on component unmount
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+    };
+  }, [passKey]); // Adding dependencies to avoid stale closure
 
   return (
     <div className="flex flex-col items-center justify-center max-w-md mx-auto space-y-6 p-6 border border-gray-200 rounded-lg shadow-sm bg-white">
       <Input
+        id="passkey"
         type="text"
-        placeholder="Enter PassKey"
+        placeholder="Enter Passkey"
         value={passKey}
         onChange={(e) => setPassKey(e.target.value)}
         className="w-full"
