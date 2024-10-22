@@ -22,6 +22,12 @@ export async function GET(
 
     return new Response(JSON.stringify({ urlInfo }));
   } catch (error: Error | any) {
-    return new Response(JSON.stringify({ error: error.message }));
+    if (error instanceof Error) {
+      return new Response(JSON.stringify({ error: error.message }));
+    }
+
+    return new Response(
+      JSON.stringify({ error: "An error occurred :: " + error }),
+    );
   }
 }
