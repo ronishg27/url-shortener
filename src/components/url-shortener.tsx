@@ -104,7 +104,7 @@ export default function Component() {
                 <a
                   href={shortUrl}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener"
                   className="font-medium underline"
                 >
                   {shortUrl}
@@ -116,7 +116,7 @@ export default function Component() {
                 <a
                   href={infoUrl}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener"
                   className="font-medium underline"
                 >
                   {infoUrl}
