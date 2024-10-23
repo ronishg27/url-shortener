@@ -16,7 +16,6 @@ import { getUrls } from "@/utils/getAllUrls";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Skeleton } from "./ui/skeleton";
-import { set } from "mongoose";
 
 export const Dashboard = () => {
   const [urls, setUrls] = useState<URLInfo[]>([]);

@@ -21,6 +21,7 @@ export default function Component() {
   const [shortUrl, setShortUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [infoUrl, setInfoUrl] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,6 +44,7 @@ export default function Component() {
       }
       if (shortID.length > 0) {
         setShortUrl(`${window.location.origin}/${shortID}`);
+        setInfoUrl(`${window.location.origin}/info/${shortID}`);
       }
     } catch (err: Error | any) {
       setError("An error occurred while shortening the URL :: " + err.message);
@@ -97,7 +99,8 @@ export default function Component() {
           {shortUrl && (
             <Alert className="mt-4 bg-primary/10 text-primary border border-primary/20 rounded-md">
               <AlertDescription>
-                Shortened URL:{" "}
+                <strong>Shortened URL:</strong>
+                <br />
                 <a
                   href={shortUrl}
                   target="_blank"
@@ -105,6 +108,18 @@ export default function Component() {
                   className="font-medium underline"
                 >
                   {shortUrl}
+                </a>
+              </AlertDescription>
+              <br />
+              <AlertDescription>
+                <strong>Check details here:</strong> <br />
+                <a
+                  href={infoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium underline"
+                >
+                  {infoUrl}
                 </a>
               </AlertDescription>
             </Alert>
