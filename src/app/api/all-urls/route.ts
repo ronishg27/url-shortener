@@ -10,6 +10,6 @@ export async function GET() {
     }
     return new Response(JSON.stringify({ urls }));
   } catch (error: Error | any) {
-    throw new Error(error.message);
+    return new Error(error.message);
   }
 }

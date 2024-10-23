@@ -16,6 +16,7 @@ import { getUrls } from "@/utils/getAllUrls";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Skeleton } from "./ui/skeleton";
+import { set } from "mongoose";
 
 export const Dashboard = () => {
   const [urls, setUrls] = useState<URLInfo[]>([]);
@@ -23,11 +24,18 @@ export const Dashboard = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (isVerified) {
-      getUrls().then((res) => {
-        setUrls(res);
+    const fetchUrls = async () => {
+      try {
+        const urls = await getUrls();
+        setUrls(urls);
+      } catch (error) {
+        console.error("Failed to fetch URLs", error);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+    if (isVerified) {
+      fetchUrls();
     }
   }, [isVerified]);
 
